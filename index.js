@@ -22,15 +22,6 @@ const prefix = '.'
 const ownerNumber = ['94718913389']
 
 //===================SESSION-AUTH============================
-if (!fs.existsSync(__dirname + '/auth_info_baileys/creds.json')) {
-if(!config.SESSION_ID) return console.log('Please add your session to SESSION_ID env !!')
-const sessdata = config.SESSION_ID
-const filer = File.fromURL(`https://mega.nz/file/${sessdata}`)
-filer.download((err, data) => {
-if(err) throw err
-fs.writeFile(__dirname + '/auth_info_baileys/creds.json', data, () => {
-console.log("Session downloaded ✅")
-})})}
 
 const express = require("express");
 const app = express();
@@ -45,7 +36,7 @@ var { version } = await fetchLatestBaileysVersion()
 
 const conn = makeWASocket({
         logger: P({ level: 'silent' }),
-        printQRInTerminal: false,
+        printQRInTerminal: true,
         browser: Browsers.macOS("Firefox"),
         syncFullHistory: true,
         auth: state,
